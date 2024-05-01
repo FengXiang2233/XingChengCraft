@@ -10,7 +10,7 @@ import org.bukkit.inventory.ItemStack;
 
 public class Machines {
     public static XingChengGen XingChengGen=new XingChengGen(Groups.Basic_Machine,"XINGCHENG_XINGCHENGGEN",
-            new SlimefunItemStack("XINGCHENG_XINGCHENGGEN", Material.CAULDRON,"§s星尘§7收集器","em..小玩意不值得一提"),
+            new SlimefunItemStack("XINGCHENG_XINGCHENGGEN", Material.CAULDRON,"§s星尘§7收集器","耗电 1500J/t\n可存储 10000J"),
             RecipeType.ANCIENT_ALTAR,
             new ItemStack[]{
                     SlimefunItems.REINFORCED_ALLOY_INGOT,SlimefunItems.ELECTRO_MAGNET,SlimefunItems.REINFORCED_ALLOY_INGOT,

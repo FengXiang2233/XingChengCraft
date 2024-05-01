@@ -12,6 +12,7 @@ import io.github.thebusybiscuit.slimefun4.core.machines.MachineProcessor;
 import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNetComponentType;
 import io.github.thebusybiscuit.slimefun4.implementation.handlers.SimpleBlockBreakHandler;
 import io.github.thebusybiscuit.slimefun4.implementation.operations.CraftingOperation;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.MachineRecipe;
@@ -30,6 +31,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public abstract class BasicMachine extends SlimefunItem implements InventoryBlock, EnergyNetComponent, MachineProcessHolder<CraftingOperation> {
 
@@ -103,8 +105,11 @@ public abstract class BasicMachine extends SlimefunItem implements InventoryBloc
             i = var2[var4];
             preset.addItem(i, ChestMenuUtils.getOutputSlotTexture(), ChestMenuUtils.getEmptyClickHandler());
         }
+        AddconstructMenu(preset);
         add(preset);
     }
+
+    public abstract void AddconstructMenu(BlockMenuPreset preset);
 
     public void add(BlockMenuPreset b) {
     }
@@ -182,7 +187,6 @@ public abstract class BasicMachine extends SlimefunItem implements InventoryBloc
     }
 
     protected void tick(Block b) {
-
         BlockMenu inv = BlockStorage.getInventory(b);
         if (this.takeCharge(b.getLocation())) {
             if (this.findNextRecipe(inv))

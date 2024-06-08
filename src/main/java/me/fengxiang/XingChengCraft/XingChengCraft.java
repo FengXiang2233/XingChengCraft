@@ -1,8 +1,8 @@
 package me.fengxiang.XingChengCraft;
 
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
-import me.fengxiang.XingChengCraft.Groups;
-import me.fengxiang.XingChengCraft.Items;
+import me.fengxiang.XingChengCraft.task.reg.Groups;
+import me.fengxiang.XingChengCraft.task.reg.Items;
 import org.bukkit.plugin.java.JavaPlugin;
 
 

@@ -24,12 +24,12 @@ class MaterialGen(
 
     override fun constructMenu(preset: BlockMenuPreset) {
         val empty = arrayOf(0,1,2,3,5,6,7,8,9,10,11,15,16,17)
-        for(num in empty.indices){
+        for(num in empty){
             preset.addItem(num, ChestMenuUtils.getBackground(),
                             ChestMenuUtils.getEmptyClickHandler())
         }
         val out = arrayOf(12,14)
-        for(num in out.indices){
+        for(num in out){
             preset.addItem(num, ChestMenuUtils.getOutputSlotTexture(),
                 ChestMenuUtils.getEmptyClickHandler())
         }

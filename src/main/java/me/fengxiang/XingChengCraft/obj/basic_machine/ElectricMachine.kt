@@ -1,4 +1,4 @@
-package me.fengxiang.XingChengCraft.obj.machine
+package me.fengxiang.XingChengCraft.obj.basic_machine
 
 import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack
@@ -16,7 +16,7 @@ abstract class ElectricMachine(
     itemGroup: ItemGroup,
     item: SlimefunItemStack,
     recipeType: RecipeType,
-    recipe: Array<out ItemStack>
+    recipe: Array<out ItemStack>?
 ) : BasicMachine(itemGroup, item, recipeType, recipe), EnergyNetComponent {
 
     override fun tick(b: Block) {

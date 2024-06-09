@@ -1,4 +1,4 @@
-package me.fengxiang.XingChengCraft.obj.machine
+package me.fengxiang.XingChengCraft.obj.basic_machine
 
 import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem
@@ -16,7 +16,7 @@ abstract class BasicMachine(
         itemGroup: ItemGroup,
         item: SlimefunItemStack,
         recipeType: RecipeType,
-        recipe: Array<out ItemStack>
+        recipe: Array<out ItemStack>?
 ) : SlimefunItem(itemGroup, item, recipeType, recipe), InventoryBlock{
 
     init {
@@ -28,7 +28,7 @@ abstract class BasicMachine(
     }
 
     // 通过重写constructMenu实现gui
-    abstract fun constructMenu(blockMenuPreset: BlockMenuPreset)
+    abstract fun constructMenu(preset: BlockMenuPreset)
 
     override fun preRegister() {
         addItemHandler(object : BlockTicker() {

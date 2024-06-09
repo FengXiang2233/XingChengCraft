@@ -23,13 +23,13 @@ class MaterialGen(
     override fun findNextRecipe(inv: BlockMenu): Boolean {
         val now: String? = BlockStorage.getLocationInfo(inv.getLocation(),"process")
         if(now==null){
-            InitProcess(inv,MaxProcess)
+            inv.addItem(4,InitProcess(inv,MaxProcess))
         }
         if(CheckProcess(inv, MaxProcess)){
             inv.pushItem(material.clone(), outputSlots[0])
-            InitProcess(inv, MaxProcess)
+            inv.addItem(4,InitProcess(inv,MaxProcess))
         }else{
-            UpdateProcess(inv, MaxProcess)
+            inv.addItem(4,UpdateProcess(inv, MaxProcess))
         }
         return true
     }

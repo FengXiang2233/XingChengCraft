@@ -5,6 +5,8 @@ import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils
 import me.fengxiang.XingChengCraft.obj.basic_machine.ElectricMachine
+import me.fengxiang.XingChengCraft.obj.basic_machine.Process
+import me.mrCookieSlime.Slimefun.api.BlockStorage
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset
 import org.bukkit.inventory.ItemStack
@@ -15,10 +17,20 @@ class MaterialGen(
     recipeType: RecipeType,
     recipe: Array<out ItemStack>?,
     private val material: SlimefunItemStack,
-): ElectricMachine(itemGroup, item, recipeType, recipe) {
+    private val MaxProcess: Int,
+): ElectricMachine(itemGroup, item, recipeType, recipe),Process {
 
     override fun findNextRecipe(inv: BlockMenu): Boolean {
-        inv.pushItem(material.clone(), outputSlots[0])
+        val now: String? = BlockStorage.getLocationInfo(inv.getLocation(),"process")
+        if(now==null){
+            InitProcess(inv,MaxProcess)
+        }
+        if(CheckProcess(inv, MaxProcess)){
+            inv.pushItem(material.clone(), outputSlots[0])
+            InitProcess(inv, MaxProcess)
+        }else{
+            UpdateProcess(inv, MaxProcess)
+        }
         return true
     }
 

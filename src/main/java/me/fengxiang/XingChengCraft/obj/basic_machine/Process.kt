@@ -11,16 +11,15 @@ import org.bukkit.inventory.ItemStack
 interface Process {
 
     fun IsProcess(inv: BlockMenu, MaxProcess: Int,slot: Int): Boolean{
-        val now: String? = BlockStorage.getLocationInfo(inv.getLocation(),"process")
+        val now: String? = BlockStorage.getLocationInfo(inv.location,"process")
         if(now==null){
-            inv.addItem(slot,InitProcess(inv,MaxProcess),
-                ChestMenuUtils.getEmptyClickHandler())
+            inv.toInventory().setItem(slot, InitProcess(inv,MaxProcess))
         }
         return if(CheckProcess(inv, MaxProcess)){
-            inv.addItem(slot,InitProcess(inv,MaxProcess))
+            inv.toInventory().setItem(slot, InitProcess(inv,MaxProcess))
             true
         }else{
-            inv.addItem(slot,UpdateProcess(inv, MaxProcess))
+            inv.toInventory().setItem(slot, UpdateProcess(inv, MaxProcess))
             false
         }
     }

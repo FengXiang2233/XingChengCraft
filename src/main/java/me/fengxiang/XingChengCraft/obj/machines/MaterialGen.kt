@@ -3,12 +3,14 @@ package me.fengxiang.XingChengCraft.obj.machines
 import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType
+import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils
 import me.fengxiang.XingChengCraft.obj.basic_machine.ElectricMachine
 import me.fengxiang.XingChengCraft.obj.basic_machine.Process
 import me.mrCookieSlime.Slimefun.api.BlockStorage
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset
+import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
 
 class MaterialGen(
@@ -37,6 +39,8 @@ class MaterialGen(
             preset.addItem(num, ChestMenuUtils.getOutputSlotTexture(),
                 ChestMenuUtils.getEmptyClickHandler())
         }
+        preset.addItem(4, CustomItemStack(Material.RED_STAINED_GLASS_PANE, "&a进度", "&fmd 电呢?"),
+                        ChestMenuUtils.getEmptyClickHandler())
     }
 
     override fun getInputSlots(): IntArray {

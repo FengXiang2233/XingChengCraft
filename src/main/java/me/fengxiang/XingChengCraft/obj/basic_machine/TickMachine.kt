@@ -15,6 +15,7 @@ abstract class TickMachine(
     recipeType: RecipeType,
     recipe: Array<out ItemStack>?
 ) : BasicMachine(itemGroup, item, recipeType, recipe) {
+
     override fun preRegister() {
         addItemHandler(object : BlockTicker() {
             override fun tick(b: Block, sf: SlimefunItem, data: Config) {

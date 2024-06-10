@@ -21,16 +21,8 @@ class MaterialGen(
 ): ElectricMachine(itemGroup, item, recipeType, recipe),Process {
 
     override fun findNextRecipe(inv: BlockMenu): Boolean {
-        val now: String? = BlockStorage.getLocationInfo(inv.getLocation(),"process")
-        if(now==null){
-            inv.addItem(4,InitProcess(inv,MaxProcess))
-        }
-        if(CheckProcess(inv, MaxProcess)){
+        if(IsProcess(inv,MaxProcess,4))
             inv.pushItem(material.clone(), outputSlots[0])
-            inv.addItem(4,InitProcess(inv,MaxProcess))
-        }else{
-            inv.addItem(4,UpdateProcess(inv, MaxProcess))
-        }
         return true
     }
 

@@ -17,7 +17,7 @@ abstract class ElectricMachine(
     item: SlimefunItemStack,
     recipeType: RecipeType,
     recipe: Array<out ItemStack>?
-) : BasicMachine(itemGroup, item, recipeType, recipe), EnergyNetComponent {
+) : TickMachine(itemGroup, item, recipeType, recipe), EnergyNetComponent {
 
     override fun tick(b: Block) {
         val inv = BlockStorage.getInventory(b)

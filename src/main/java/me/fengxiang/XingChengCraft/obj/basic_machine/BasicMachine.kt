@@ -30,19 +30,4 @@ abstract class BasicMachine(
     // 通过重写constructMenu实现gui
     abstract fun constructMenu(preset: BlockMenuPreset)
 
-    override fun preRegister() {
-        addItemHandler(object : BlockTicker() {
-            override fun tick(b: Block, sf: SlimefunItem, data: Config) {
-                this@BasicMachine.tick(b)
-            }
-
-            override fun isSynchronized(): Boolean {
-                return false
-            }
-        })
-    }
-
-    // 通过重写tick来工作
-    abstract fun tick(b:Block)
-
 }

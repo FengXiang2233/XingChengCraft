@@ -22,7 +22,7 @@ class Items{
         SlimefunItem(
             Groups.XC_Materials,
             Items().XingCheng_Ingot,
-            RecipeType.ANCIENT_ALTAR, arrayOf<ItemStack>(
+            RecipeType.SMELTERY, arrayOf<ItemStack>(
                 Items().XingCheng,Items().XingCheng, Items().XingCheng,
                 Items().XingCheng, SlimefunItems.REINFORCED_ALLOY_INGOT, Items().XingCheng,
                 Items().XingCheng, Items().XingCheng, Items().XingCheng

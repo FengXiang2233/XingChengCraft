@@ -17,6 +17,6 @@ class Items {
     val XingCheng_Core = SlimefunItemStack("XINGCHENGCRAFT_XINGCHENG_CORE",
                             Material.FIREWORK_STAR, "§s星尘§7核心", "em..就加了点东西")
 
-    val XingChengGen = SlimefunItemStack("XINGCHENGCRAFT_XINGCHENG_GEN",
-                            Material.CAULDRON, "§s星尘§7生成器", ElectricLore().lore(1000,300))
+    val XingChengGen = SlimefunItemStack("XINGCHENGCRAFT_XINGCHENG_GEN", Material.CAULDRON,
+                                            "§s星尘§7生成器", ElectricLore().capacityLore(1000),ElectricLore().energyConsumptionLore(300))
 }

@@ -1,6 +1,7 @@
 package me.fengxiang.XingChengCraft.obj
 
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack
+import me.fengxiang.XingChengCraft.obj.basic_machine.ElectricLore
 import org.bukkit.Material
 
 class Items {
@@ -17,5 +18,5 @@ class Items {
                             Material.FIREWORK_STAR, "§s星尘§7核心", "em..就加了点东西")
 
     val XingChengGen = SlimefunItemStack("XINGCHENGCRAFT_XINGCHENG_GEN",
-                            Material.CAULDRON, "§s星尘§7生成器", "test")
+                            Material.CAULDRON, "§s星尘§7生成器", ElectricLore().lore(1000,300))
 }

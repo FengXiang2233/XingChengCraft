@@ -53,6 +53,8 @@ class Items{
             Groups.Basic_Machine,
             Items().XingChengGen,
             RecipeType.NULL, null,
+            1000,
+            300,
             Items().XingCheng,
             30
         ).register(inst)

@@ -16,7 +16,7 @@ class Groups {
             NamespacedKey(inst, "xingchengcraft_main"),
             CustomItemStack(Material.GUNPOWDER, "&7星辰工艺"), 3
         )
-        Groups.XC_Materials = SubItemGroup(
+            Groups.XC_Materials = SubItemGroup(
             NamespacedKey(inst, "xingchengcraft_materials"),
             Groups.Group_Main, CustomItemStack(Material.GUNPOWDER, "&7材料")
         )

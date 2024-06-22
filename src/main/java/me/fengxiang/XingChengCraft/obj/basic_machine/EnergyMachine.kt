@@ -12,37 +12,35 @@ import org.bukkit.block.Block
 import org.bukkit.inventory.ItemStack
 import javax.annotation.Nonnull
 
-abstract class ElectricMachine(
+abstract class EnergyMachine(
     itemGroup: ItemGroup,
     item: SlimefunItemStack,
     recipeType: RecipeType,
-    recipe: Array<out ItemStack>?,
-    private val energyConsumption: Int,
+    recipe: Array<out ItemStack>?
 ) : TickMachine(itemGroup, item, recipeType, recipe), EnergyNetComponent {
+
+    override fun getEnergyComponentType(): EnergyNetComponentType {
+        return EnergyNetComponentType.GENERATOR
+    }
 
     override fun tick(b: Block) {
         val inv = BlockStorage.getInventory(b)
         if (takeCharge(b.location)) {
             if (findNextRecipe(inv)) setCharge(b.location,
-                this.getCharge(b.location) - getEnergyConsumption())
+                this.getCharge(b.location) + getEnergyConsumption())
         }
     }
 
     private fun takeCharge(@Nonnull l: Location): Boolean {
         return if (this.isChargeable) {
             val charge = this.getCharge(l)
-            charge >= getEnergyConsumption()
+            charge <= getEnergyConsumption()
         } else {
             true
         }
     }
 
-    override fun getEnergyComponentType(): EnergyNetComponentType {
-        return EnergyNetComponentType.CONSUMER
-    }
-
     abstract fun getEnergyConsumption(): Int
 
     abstract fun findNextRecipe(inv: BlockMenu):Boolean
-
 }

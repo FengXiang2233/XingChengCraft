@@ -19,4 +19,8 @@ class Items {
 
     val XingChengGen = SlimefunItemStack("XINGCHENGCRAFT_XINGCHENG_GEN", Material.CAULDRON,
                                             "§s星尘§7生成器", ElectricLore().capacityLore(1000),ElectricLore().energyConsumptionLore(300))
+
+    val DustEnergyMachine = SlimefunItemStack("XINGCHENGCRAFT_DUST_ENERGY_MACHINE", Material.SMOOTH_SANDSTONE,
+                                                "§s星尘§7粉尘爆发器", ElectricLore().capacityLore(1000))
+
 }

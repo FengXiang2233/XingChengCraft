@@ -11,9 +11,7 @@ interface Process {
 
     fun IsProcess(inv: BlockMenu, MaxProcess: Int, slot: Int): Boolean{
         val now: String? = BlockStorage.getLocationInfo(inv.location,"process")
-        if(now==null){
-            inv.toInventory().setItem(slot, InitProcess(inv,MaxProcess))
-        }
+        if(now==null) inv.toInventory().setItem(slot, InitProcess(inv,MaxProcess))
         return if(CheckProcess(inv)){
             inv.toInventory().setItem(slot, InitProcess(inv,MaxProcess))
             true

@@ -7,9 +7,11 @@ import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils
 import me.fengxiang.XingChengCraft.obj.basic_machine.EnergyMachine
 import me.fengxiang.XingChengCraft.obj.basic_machine.Process
+import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config
 import me.mrCookieSlime.Slimefun.api.BlockStorage
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset
+import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
 
@@ -22,20 +24,23 @@ class SimpleEnergyMachine(
     private val Recipe: Map<ItemStack, MachinesRecipe>
 ) : EnergyMachine(itemGroup, item, recipeType, recipe),Process {
 
-    private var energyConsumption: Int = 0
+    private var SelfGeneratedOutput: Int = 0
 
-    override fun findNextRecipe(inv: BlockMenu): Boolean {
-        return if(CheckProcess(inv)){
-            if(inv.getItemInSlot(13) in Recipe.keys){
-                val now: String? = BlockStorage.getLocationInfo(inv.location,"process")
-                if(now==null) inv.toInventory().setItem(4, InitProcess(inv, Recipe[inv.getItemInSlot(13)]!!.time))
-                energyConsumption=Recipe[inv.getItemInSlot(13)]!!.EnergyConsumption
-                inv.consumeItem(13)
+    override fun findNextRecipe(inv: BlockMenu) {
+        val now: String? = BlockStorage.getLocationInfo(inv.location,"process")
+        if(now==null) InitProcess(inv, 0)
+        if(CheckProcess(inv)){
+            SelfGeneratedOutput=0
+            for(item in Recipe.keys){
+                if(item.isSimilar(inv.getItemInSlot(13))){
+                    SelfGeneratedOutput= Recipe[item]?.EnergyConsumption ?: 0
+                    inv.consumeItem(13 )
+                    inv.toInventory().setItem(4, InitProcess(inv, Recipe[item]?.time ?: 0))
+                    break
+                }
             }
-            false
         }else{
             inv.toInventory().setItem(4, UpdateProcess(inv))
-            true
         }
     }
 
@@ -62,8 +67,8 @@ class SimpleEnergyMachine(
         return IntArray(0)
     }
 
-    override fun getEnergyConsumption(): Int {
-        return energyConsumption
+    override fun getGeneratedOutput(p0: Location, p1: Config): Int {
+        return SelfGeneratedOutput
     }
 
     override fun getCapacity(): Int {

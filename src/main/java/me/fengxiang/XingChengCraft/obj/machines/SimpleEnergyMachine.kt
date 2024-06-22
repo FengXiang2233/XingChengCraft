@@ -3,6 +3,7 @@ package me.fengxiang.XingChengCraft.obj.machines
 import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType
+import io.github.thebusybiscuit.slimefun4.core.attributes.RecipeDisplayItem
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils
 import me.fengxiang.XingChengCraft.obj.basic_machine.EnergyMachine
@@ -22,7 +23,7 @@ class SimpleEnergyMachine(
     recipe: Array<out ItemStack>?,
     private val electricCapacity: Int,
     private val Recipe: Map<ItemStack, MachinesRecipe>
-) : EnergyMachine(itemGroup, item, recipeType, recipe),Process {
+) : EnergyMachine(itemGroup, item, recipeType, recipe),Process, RecipeDisplayItem {
 
     private var SelfGeneratedOutput: Int = 0
 
@@ -73,5 +74,18 @@ class SimpleEnergyMachine(
 
     override fun getCapacity(): Int {
         return electricCapacity
+    }
+
+    override fun getDisplayRecipes(): MutableList<ItemStack> {
+        val recipeList: MutableList<ItemStack> = mutableListOf()
+        for(item in Recipe.keys){
+            val loreList: MutableList<String> = mutableListOf("可持续时间 "+(Recipe[item]?.time?:0)+" 粘液刻",
+                                                                "发电功率 "+(Recipe[item]?.energyConsumption?:0)+" J/t")
+            val meta=item.itemMeta
+            meta!!.setLore(loreList)
+            item.setItemMeta(meta)
+            recipeList.add(item)
+        }
+        return recipeList
     }
 }

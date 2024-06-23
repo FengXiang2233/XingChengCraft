@@ -26,7 +26,7 @@ interface Process {
         BlockStorage.addBlockInfo(inv.location, "process", ""+MaxProcess)
         return CustomItemStack(
             Material.GREEN_STAINED_GLASS_PANE,
-            "§a进度", "&f还剩余 $MaxProcess/$MaxProcess 粘液刻"
+            "§a进度", "&f还剩余 $MaxProcess/$MaxProcess tick"
         )
     }
 
@@ -36,7 +36,7 @@ interface Process {
         BlockStorage.addBlockInfo(inv.location, "process", "" + now)
         return CustomItemStack(
             Material.GREEN_STAINED_GLASS_PANE,
-            "§a进度", "&f还剩余 $now/$maxProcess 粘液刻"
+            "§a进度", "&f还剩余 $now/$maxProcess tick"
         )
     }
 

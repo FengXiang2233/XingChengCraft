@@ -25,9 +25,13 @@ class MaterialGen(
 ): ElectricMachine(itemGroup, item, recipeType, recipe,electricCapacity),Process {
 
     override fun findNextRecipe(inv: BlockMenu): Boolean {
-        if(IsProcess(inv,MaxProcess,4))
-            inv.pushItem(material.clone(), outputSlots[0])
-        return true
+        return if ((inv.getItemInSlot(13)?.amount?:0) != 64) {
+            if (IsProcess(inv, MaxProcess, 4))
+                inv.pushItem(material.clone(), 13)
+            true
+        }else{
+            false
+        }
     }
 
     override fun constructMenu(preset: BlockMenuPreset) {

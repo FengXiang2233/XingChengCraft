@@ -56,7 +56,7 @@ class SimpleEnergyMachine(
             preset.addItem(num, ChestMenuUtils.getInputSlotTexture(),
                 ChestMenuUtils.getEmptyClickHandler())
         }
-        preset.addItem(4, CustomItemStack(Material.RED_STAINED_GLASS_PANE, "&a进度", "&fmd 电呢?"),
+        preset.addItem(4, CustomItemStack(Material.RED_STAINED_GLASS_PANE, "&a进度", "无物品输入"),
             ChestMenuUtils.getEmptyClickHandler())
     }
 
@@ -79,8 +79,9 @@ class SimpleEnergyMachine(
     override fun getDisplayRecipes(): MutableList<ItemStack> {
         val recipeList: MutableList<ItemStack> = mutableListOf()
         for(item in Recipe.keys){
-            val loreList: MutableList<String> = mutableListOf("可持续时间 "+(Recipe[item]?.time?:0)+" 粘液刻",
-                                                                "发电功率 "+(Recipe[item]?.energyConsumption?:0)+" J/t")
+            val loreList: MutableList<String> = mutableListOf("§7-----",
+                "§7持续时间 "+(Recipe[item]?.time?:0)+" tick",
+                "§7发电效率 "+(Recipe[item]?.energyConsumption?:0)+" J/t")
             val meta=item.itemMeta
             meta!!.setLore(loreList)
             item.setItemMeta(meta)

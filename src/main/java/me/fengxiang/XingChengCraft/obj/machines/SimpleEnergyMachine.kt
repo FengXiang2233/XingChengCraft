@@ -25,19 +25,27 @@ class SimpleEnergyMachine(
     private val Recipe: Map<ItemStack, MachinesRecipe>
 ) : EnergyMachine(itemGroup, item, recipeType, recipe),Process, RecipeDisplayItem {
 
-    private var SelfGeneratedOutput: Int = 0
+    private var selfGeneratedOutput: Int = 0
 
     override fun findNextRecipe(inv: BlockMenu) {
         val now: String? = BlockStorage.getLocationInfo(inv.location,"process")
         if(now==null) InitProcess(inv, 0)
         if(CheckProcess(inv)){
-            SelfGeneratedOutput=0
+            selfGeneratedOutput=0
             for(item in Recipe.keys){
                 if(item.isSimilar(inv.getItemInSlot(13))){
-                    SelfGeneratedOutput= Recipe[item]?.EnergyConsumption ?: 0
+                    selfGeneratedOutput= Recipe[item]?.EnergyConsumption ?: 0
                     inv.consumeItem(13 )
                     inv.toInventory().setItem(4, InitProcess(inv, Recipe[item]?.time ?: 0))
+                    inv.toInventory().setItem(8, CustomItemStack(Material.YELLOW_STAINED_GLASS_PANE, "&a发电效率", "&f$selfGeneratedOutput J/t"
+                    ))
                     break
+                }else{
+                    inv.toInventory().setItem(8, CustomItemStack(Material.YELLOW_STAINED_GLASS_PANE, "&a发电效率", "&f0 J/t"))
+                    inv.toInventory().setItem(4,CustomItemStack(
+                        Material.RED_STAINED_GLASS_PANE,
+                        "§a进度", "&f物品不在配方内或无物品输入"
+                    ))
                 }
             }
         }else{
@@ -46,7 +54,7 @@ class SimpleEnergyMachine(
     }
 
     override fun constructMenu(preset: BlockMenuPreset) {
-        val empty = arrayOf(0,1,2,3,5,6,7,8,9,10,11,15,16,17)
+        val empty = arrayOf(0,1,2,3,5,6,7,9,10,11,15,16,17)
         for(num in empty){
             preset.addItem(num, ChestMenuUtils.getBackground(),
                 ChestMenuUtils.getEmptyClickHandler())
@@ -57,6 +65,8 @@ class SimpleEnergyMachine(
                 ChestMenuUtils.getEmptyClickHandler())
         }
         preset.addItem(4, CustomItemStack(Material.RED_STAINED_GLASS_PANE, "&a进度", "无物品输入"),
+            ChestMenuUtils.getEmptyClickHandler())
+        preset.addItem(8, CustomItemStack(Material.YELLOW_STAINED_GLASS_PANE, "&a发电效率", "0 J/t"),
             ChestMenuUtils.getEmptyClickHandler())
     }
 
@@ -69,7 +79,7 @@ class SimpleEnergyMachine(
     }
 
     override fun getGeneratedOutput(p0: Location, p1: Config): Int {
-        return SelfGeneratedOutput
+        return selfGeneratedOutput
     }
 
     override fun getCapacity(): Int {

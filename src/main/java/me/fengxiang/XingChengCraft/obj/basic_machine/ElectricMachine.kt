@@ -16,8 +16,7 @@ abstract class ElectricMachine(
     itemGroup: ItemGroup,
     item: SlimefunItemStack,
     recipeType: RecipeType,
-    recipe: Array<out ItemStack>?,
-    private val energyConsumption: Int,
+    recipe: Array<out ItemStack>?
 ) : TickMachine(itemGroup, item, recipeType, recipe), EnergyNetComponent {
 
     override fun tick(b: Block) {
@@ -25,6 +24,8 @@ abstract class ElectricMachine(
         if (takeCharge(b.location)) {
             if (findNextRecipe(inv)) setCharge(b.location,
                 this.getCharge(b.location) - getEnergyConsumption())
+        }else{
+            notElectric(inv)
         }
     }
 
@@ -39,6 +40,9 @@ abstract class ElectricMachine(
 
     override fun getEnergyComponentType(): EnergyNetComponentType {
         return EnergyNetComponentType.CONSUMER
+    }
+
+    open fun notElectric(inv: BlockMenu){
     }
 
     abstract fun getEnergyConsumption(): Int
